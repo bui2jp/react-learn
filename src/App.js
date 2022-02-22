@@ -3,14 +3,23 @@ import React from "react";
 //1 Function Component
 function App() {
 
-  const myage=5;
+  const dogs = [
+    { name: "a", age :1},
+    { name: "b", age :2},
+    { name: "c", age :3},        
+    { name: "a", age :1},
+    { name: "b", age :2},
+    { name: "c", age :3},            
+  ]
 
   //propsを渡す
   return (    
       <React.Fragment> 
-        <Dog name={"aaa"} age={10}/>
-        <Dog name={"bbb"} age={myage}/>
-        <Dog name={"ccc"} age={3}/>
+        {
+          dogs.map( (value, index) => {
+            return <Dog name={value.name} age={value.age} key={index}/>
+          })
+        }
       </React.Fragment>
   );
 }

@@ -11,8 +11,15 @@ function App() {
       <React.Fragment> 
         <label htmlFor="bar">test:</label>
         <input type="text" onClick={() => { console.log('test'); }} />
+        <Dog/>
+        <Dog/>
+        <Dog/>                
       </React.Fragment>
   );
+}
+
+const Dog = () => {
+  return <div>dog</div>
 }
 // import React from "react";
 

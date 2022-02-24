@@ -1,37 +1,31 @@
 import React, { Component } from "react";
+import { connect, connet } from 'react-redux'
 
-//1 Function Component
-const App = () => (<MyCounter></MyCounter>);
+import { increment, decrement } from '../action'
 
-class MyCounter extends Component{
+class App extends Component{
   constructor(props){
     console.log(props);
     super(props);
-    this.state = { 
-      count: 0,
-      nama: "aaa",
-      remark: "aaa"      
-    }
   }
   render(){
     console.log(this.state + " : in render()");
+    const props = this.props;
     return (
         <React.Fragment>
-          <div>my counter test { this.state.count }</div>
-          <button onClick={this.handlePlusButton}>+1</button>
-          <button onClick={this.handleMinusButton}>-1</button>
+          <div>my value test { props.value }</div>
+          <button onClick={props.increment}>+1</button>
+          <button onClick={props.decrement}>-1</button>
         </React.Fragment>
       );
   }
-
-  handlePlusButton = () => {
-    console.log("handle Plus Button. " + this.state.count);
-    this.setState({count: this.state.count + 1})
-  }
-  handleMinusButton = () => {
-    console.log("handle Minus Button. " + this.state.count);
-    this.setState({count: this.state.count - 1})
-  }  
 }
+const mapStateToProps = state => ({ value: state.count.value });
+// const mapDispatchToProps = dispatch => ({
+//   increment: () => dispatch(increment()),
+//   decrement: () => dispatch(decrement()),  
+// });
+const mapDispatchToProps = ({ increment, decrement });
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+//export default App;

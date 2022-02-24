@@ -1,39 +1,37 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
 
 //1 Function Component
-function App() {
+const App = () => (<MyCounter></MyCounter>);
 
-  console.log('start App()');
+class MyCounter extends Component{
+  constructor(props){
+    console.log(props);
+    super(props);
+    this.state = { 
+      count: 0,
+      nama: "aaa",
+      remark: "aaa"      
+    }
+  }
+  render(){
+    console.log(this.state + " : in render()");
+    return (
+        <React.Fragment>
+          <div>my counter test { this.state.count }</div>
+          <button onClick={this.handlePlusButton}>+1</button>
+          <button onClick={this.handleMinusButton}>-1</button>
+        </React.Fragment>
+      );
+  }
 
-  const dogs = [
-    { name: "a", age: 1},
-    { name: "b", age: 2},
-    { name: "c", age: 3},
-    { name: "123", age: "a"},    
-  ]
-
-  //propsを渡す
-  return (    
-      <React.Fragment> 
-        {
-          dogs.map( (value, index) => {
-            return <Dog name={value.name} age={value.age} key={index}/>
-          })
-        }
-      </React.Fragment>
-  );
-}
-
-//propsを受け取る
-const Dog = (props) => {
-  return <div>dog {props.name} age:{props.age}</div>
-}
-
-//proptypesを用いた型チェック
-Dog.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.number.isRequired
+  handlePlusButton = () => {
+    console.log("handle Plus Button. " + this.state.count);
+    this.setState({count: this.state.count + 1})
+  }
+  handleMinusButton = () => {
+    console.log("handle Minus Button. " + this.state.count);
+    this.setState({count: this.state.count - 1})
+  }  
 }
 
 export default App;

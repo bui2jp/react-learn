@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect, connet } from 'react-redux'
+import { connect } from 'react-redux'
 
 import { increment, decrement } from '../action'
 

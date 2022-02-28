@@ -9,17 +9,24 @@ import './index.css';
 import reducer from './reducers'
 import EventIndex from './componets/events_index';
 import EventNew from './componets/events_new';
+import EventShow from './componets/events_show';
 import reportWebVitals from './reportWebVitals';
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 //thunk を store にいれる
-const store = createStore(reducer, applyMiddleware(thunk));
+const enhancer = process.env.NODE_ENV === 'development' ?
+  composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk);
+const store = createStore(reducer, enhancer);
 
 ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/event/new" element={<EventNew/>}/>
+          <Route path="/event/:id" element={<EventShow/>}/>          
           <Route path="/" element={<EventIndex/>}/>
+          <Route path="/events" element={<EventIndex/>}/>          
         </Routes>
       </BrowserRouter>
       
